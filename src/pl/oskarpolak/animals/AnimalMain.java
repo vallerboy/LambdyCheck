@@ -1,9 +1,5 @@
 package pl.oskarpolak.animals;
 
-import pl.oskarpolak.animals.checker.CheckJump;
-import pl.oskarpolak.animals.checker.CheckRun;
-import pl.oskarpolak.animals.checker.CheckSpeak;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,8 +22,8 @@ public class AnimalMain {
 //        AnimalChecker checkRun = new CheckRun();
 //        AnimalChecker checkSpeak = new CheckSpeak();
 
-        checker(animalList, );
-        checker(animalList, checkRun);
+        checker(animalList, s -> s.isCanJump());
+        checker(animalList, s -> s.isCanRun());
     }
 
     private static void checker(List<Animal> animals, AnimalChecker animalChecker){
