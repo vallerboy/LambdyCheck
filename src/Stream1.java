@@ -25,9 +25,16 @@ public class Stream1 {
                 .ifPresent(s -> System.out.println(s));
 
 
-        String obiekt = "AkademiaKodu";
-        Optional<String> optional = Optional.ofNullable(obiekt);
-        optional.ifPresent(s -> System.out.println(s));
+        String obiekt = "AkademiaKodu jest fajna!";
+
+        Optional<String> myOptional = Optional.ofNullable(obiekt);
+
+        if(myOptional.isPresent()){
+            System.out.println("Obiekt istnieje " + myOptional.get());
+        }else {
+            System.out.println("Obiekt jest nullem!!");
+        }
+
 
         System.out.println("-------------------------");
 
@@ -74,14 +81,55 @@ public class Stream1 {
 
         System.out.println("Statystki: " + statistics);
 
-        List<String> converted =
+        List<Integer> converted =
                 personList
                         .stream()
-                        .map(s -> s.getName())
+                        .map(s -> s.getAge())
                         .collect(Collectors.toList());
 
-        System.out.println(converted);
+       // System.out.println(converted);
 
+
+
+        List<Person> personList1 = new ArrayList<>();
+        personList1.add(new Person("Oskar", 26));
+        personList1.add(new Person("Oskar", 20));
+        personList1.add(new Person("Lukasz", 20));
+        personList1.add(new Person("Kuba", 14));
+
+        Map<String, List<Person>> groupByAge = personList1
+                .stream()
+                .collect(Collectors.groupingBy(o -> o.getName()));
+
+       // BiConsumer
+       groupByAge.forEach( (key, value) -> printList(value));
+
+       List<String> names = Arrays.asList("Katarzyna", "Oskar", "Magda", "Tomek", "Dominika", "Mateusz");
+
+
+       names
+               .stream()
+               .map(s -> {
+                   if(s.endsWith("a")){
+                       return s + "(K)";
+                   }else {
+                       return  s + "(M)";
+                   }
+               }).mapToInt(s -> s.length())
+               .max()
+               .ifPresent(System.out::println);
+
+       List<String> womenNames = names
+               .stream()
+               .filter(s -> s.endsWith("a"))
+               .collect(Collectors.toList());
+
+    }
+
+    public static void printList(List<Person> list) {
+        for(Person p : list) {
+            System.out.println("Person: " + p.toString());
+        }
 
     }
 

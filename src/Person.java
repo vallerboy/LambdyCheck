@@ -43,4 +43,14 @@ public class Person {
     public void setSex(char sex) {
         this.sex = sex;
     }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", age=" + age +
+                ", sex=" + sex +
+                '}';
+    }
 }
